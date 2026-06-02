@@ -1,15 +1,18 @@
-# Terraform Docker Container Project
+# Terraform Docker Container using IaC
 
 ## Objective
 
-Provision a local Docker container using Terraform Infrastructure as Code (IaC).
+This project demonstrates Infrastructure as Code (IaC) using Terraform and Docker.
+Terraform is used to provision and manage a local Docker container running Nginx.
 
 ---
 
-# Tools Used
+# Tools & Technologies
 
 * Terraform
 * Docker
+* Nginx
+* GitHub
 
 ---
 
@@ -18,20 +21,21 @@ Provision a local Docker container using Terraform Infrastructure as Code (IaC).
 ```bash
 terraform-docker-container/
 │
-├── main.tf
-├── provider.tf
-├── variables.tf
-├── outputs.tf
-├── .gitignore
+├── .terraform/
 ├── screenshots/
+├── .terraform.lock.hcl
+├── main.tf
+├── terraform.exe
+├── terraform.tfstate
+├── terraform.tfstate.backup
 └── README.md
 ```
 
 ---
 
-# Terraform Files
+# Terraform Configuration
 
-## provider.tf
+## main.tf
 
 ```hcl
 terraform {
@@ -44,13 +48,7 @@ terraform {
 }
 
 provider "docker" {}
-```
 
----
-
-## main.tf
-
-```hcl
 resource "docker_image" "nginx_image" {
   name = "nginx:latest"
 }
@@ -68,63 +66,119 @@ resource "docker_container" "nginx_container" {
 
 ---
 
-# Commands Used
+# Steps Performed
 
-## Initialize Terraform
+## 1. Initialize Terraform
 
 ```bash
 terraform init
 ```
 
-## Validate Configuration
+This command downloads required providers and initializes Terraform.
+
+---
+
+## 2. Validate Terraform Code
 
 ```bash
 terraform validate
 ```
 
-## Preview Infrastructure
+Checks whether the Terraform configuration is valid.
+
+---
+
+## 3. Preview Infrastructure Changes
 
 ```bash
 terraform plan
 ```
 
-## Create Infrastructure
+Shows what resources Terraform will create before deployment.
+
+---
+
+## 4. Create Docker Infrastructure
 
 ```bash
 terraform apply
 ```
 
-## Check Running Container
+Type:
+
+```bash
+yes
+```
+
+Terraform pulls the Nginx image and creates a Docker container.
+
+---
+
+## 5. Verify Running Container
 
 ```bash
 docker ps
 ```
 
-## Check Terraform State
+Checks whether the container is running successfully.
+
+---
+
+## 6. Check Terraform State
 
 ```bash
 terraform state list
 ```
 
-## Destroy Infrastructure
+Displays all Terraform-managed resources.
+
+---
+
+## 7. Destroy Infrastructure
 
 ```bash
 terraform destroy
 ```
 
+Type:
+
+```bash
+yes
+```
+
+Removes the Docker container and related resources.
+
 ---
 
 # Output
 
-* Docker container created successfully
-* Nginx application accessible on localhost:8080
-* Infrastructure managed using Terraform
+After successful deployment:
+
+* Docker container runs locally
+* Nginx server accessible on:
+
+```bash
+http://localhost:8080
+```
 
 ---
 
-# Learning Outcome
+# Screenshots
 
-* Understood Infrastructure as Code
-* Learned Terraform workflow
+Project execution screenshots are available inside the `screenshots/` folder.
+
+---
+
+# Learning Outcomes
+
+* Learned Infrastructure as Code (IaC)
+* Understood Terraform workflow
 * Managed Docker containers using Terraform
-* Learned state management in Terraform
+* Worked with Terraform state management
+* Automated infrastructure provisioning
+
+---
+
+# Author
+
+Harshavardhan Bhosale
